@@ -1,7 +1,32 @@
 <template>
-  <!-- your answer -->
+  <v-container>
+    <v-row align="stretch">
+      <v-col
+        v-for="(product, index) in productStore.products"
+        :key="index"
+        cols="12"
+        md="4"
+      >
+        <StoreItem :product="product" class="fill-height"></StoreItem>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts" setup>
-// your answer
+  import { useProductStore } from '../stores/ProductStore';
+  //import { onMounted } from 'vue';
+  import StoreItem from "./StoreItem.vue";
+  
+  const productStore = useProductStore();
+  productStore.init();
+  productStore.filterByRating(4.5);
+    //console.log(productStore.products);
+  
+  
+  
+  //productStore.init();
+  //console.log(productStore.products);
+
+  
 </script>
