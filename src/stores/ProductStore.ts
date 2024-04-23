@@ -32,7 +32,9 @@ export const useProductStore = defineStore("ProductStore", {
           stock: prod.data.stock,
           image: prod.data.image,
           category: prod.data.category
-        });
+        },
+        {merge: true}
+      );
       });
 
       //populating pinia store from firebase
@@ -40,6 +42,7 @@ export const useProductStore = defineStore("ProductStore", {
       var prodDocs: ProductDoc[] = [];
       getDocs(productCollection).then((qs: QuerySnapshot) => {
         qs.forEach((qd: QueryDocumentSnapshot) => {
+          //console.log(qd.id, qd.data());
           const productData = qd.data() as Product;
           const docId = qd.id;
           prodDocs.push({id: docId, data: productData});
