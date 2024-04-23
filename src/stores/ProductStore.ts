@@ -21,7 +21,7 @@ export const useProductStore = defineStore("ProductStore", {
     };
   },
   actions: {
-    init() {
+    async init() {
       initProducts.forEach(async (prod: any) => {     //initialize firebase
         const prodDoc = doc(db, "products", prod.id);
         await setDoc(prodDoc, {
@@ -40,13 +40,12 @@ export const useProductStore = defineStore("ProductStore", {
       //populating pinia store from firebase
       const productCollection: CollectionReference = collection(db, "products");
       var prodDocs: ProductDoc[] = [];
-      getDocs(productCollection).then((qs: QuerySnapshot) => {
-        qs.forEach((qd: QueryDocumentSnapshot) => {
-          //console.log(qd.id, qd.data());
-          const productData = qd.data() as Product;
-          const docId = qd.id;
-          prodDocs.push({id: docId, data: productData});
-        });
+      const qs: QuerySnapshot = await getDocs(productCollection);
+      qs.forEach((qd: QueryDocumentSnapshot) => {
+        //console.log(qd.id, qd.data());
+        const productData = qd.data() as Product;
+        const docId = qd.id;
+        prodDocs.push({id: docId, data: productData});
       });
       this.products = prodDocs;
     },
