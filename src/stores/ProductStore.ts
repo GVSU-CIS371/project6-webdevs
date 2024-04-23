@@ -10,6 +10,8 @@ import {
   addDoc,
   QuerySnapshot,
   QueryDocumentSnapshot,
+  DocumentSnapshot,
+  getDoc,
   getDocs
 } from "firebase/firestore"
 import { db } from "../firebase.ts"
@@ -22,7 +24,13 @@ export const useProductStore = defineStore("ProductStore", {
   },
   actions: {
     async init() {
-      initProducts.forEach(async (prod: any) => {     //initialize firebase
+      // Check if the Firestore database is already populated
+    const prodCollection: CollectionReference = collection(db, "products");
+    const firstDocSnapshot: DocumentSnapshot = await getDoc(doc(prodCollection, initProducts[0].id));
+
+    // If the first document doesn't exist, populate the database
+    if (!firstDocSnapshot.exists()) {
+      const initPromises = initProducts.map(async (prod: any) => {     //initialize firebase
         const prodDoc = doc(db, "products", prod.id);
         await setDoc(prodDoc, {
           name: prod.data.name, 
@@ -36,6 +44,9 @@ export const useProductStore = defineStore("ProductStore", {
         {merge: true}
       );
       });
+
+      await Promise.all(initPromises);
+    }
 
       //populating pinia store from firebase
       const productCollection: CollectionReference = collection(db, "products");
