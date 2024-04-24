@@ -1,5 +1,5 @@
 <template>
-    <v-container class="pa-5 ma-10 text-center">
+    <v-container>
         <v-form @submit.prevent="handleSubmit">
             <v-text-field label="Name" v-model="product.name" :rules="globalRules"></v-text-field>
             <v-text-field label="Description" v-model="product.description" :rules="globalRules"></v-text-field>

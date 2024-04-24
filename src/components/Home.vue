@@ -11,9 +11,15 @@
       </v-col>
     </v-row>
   </v-container>
-  <v-overlay v-model="showEdit">
-    <EditItem :product="editedProduct"></EditItem>
-  </v-overlay>
+  <v-dialog v-model="showEdit" width="auto">
+    <v-card
+        min-width="800"
+        title="Edit item"
+      >
+      <EditItem :product="editedProduct"></EditItem>
+      </v-card>
+    
+  </v-dialog>
   
 </template>
 
@@ -27,10 +33,6 @@
   const productStore = useProductStore();
   productStore.init();
   const showEdit = ref(false);
-  function onClickEdit(value: ProductDoc) {
-    editedProduct.value = value;
-    showEdit.value = true;
-  }
   const editedProduct = ref({
     id: "0",
     data: {
@@ -44,8 +46,13 @@
       image:
         "https://m.media-amazon.com/images/I/31TcnQiBTpL._AC_UF894,1000_QL80_.jpg",
       category: "Electronics",
-    },
+    }
   });
+  function onClickEdit(value: ProductDoc) {
+    console.log(value);
+    editedProduct.value = value;
+    showEdit.value = true;
+  }
     
   
   
