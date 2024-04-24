@@ -26,10 +26,10 @@ export const useProductStore = defineStore("ProductStore", {
     async init() {
       // Check if the Firestore database is already populated
       const prodCollection: CollectionReference = collection(db, "products");
-      const firstDocSnapshot: DocumentSnapshot = await getDoc(doc(prodCollection, initProducts[0].id));
+      const allDocSnapshot: QuerySnapshot = await getDocs(prodCollection);
 
-      // If the first document doesn't exist, populate the database
-      if (!firstDocSnapshot.exists()) {
+      // If database is empty, populate it
+      if (allDocSnapshot.size === 0) {
         const initPromises = initProducts.map(async (prod: any) => {     //initialize firebase
           const prodDoc = doc(db, "products", prod.id);
           await setDoc(prodDoc, {

@@ -3,11 +3,11 @@
     <v-row align="stretch">
       <v-col
         v-for="(product, index) in productStore.products"
-        :key="index"
+        :key="product.id"
         cols="12"
         md="4"
       >
-        <StoreItem :product="product" class="fill-height" @clicked="onClickEdit"></StoreItem>
+        <StoreItem :product="product" class="fill-height" @clicked="onClickEdit" @deleted="onClickDelete"></StoreItem>
       </v-col>
     </v-row>
   </v-container>
@@ -29,6 +29,8 @@
   import StoreItem from "./StoreItem.vue";
   import EditItem from "./EditItem.vue";
   import { ProductDoc } from '../types/product';
+  import {doc, deleteDoc} from "firebase/firestore"
+  import {db} from "../firebase"
   
   const productStore = useProductStore();
   productStore.init();
@@ -55,6 +57,11 @@
   }
   function onClickSubmit() {
     showEdit.value = false;
+  }
+  async function onClickDelete(value: ProductDoc) {
+    console.log("deleted: Home.vue");
+    await deleteDoc(doc(db, "products", value.id));
+    productStore.init();
   }
     
   

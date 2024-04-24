@@ -24,6 +24,7 @@
     
     <v-card-actions>
       <v-btn @click.native="showEdit" variant="tonal">Edit</v-btn>
+      <v-btn @click.native="emitDelete" variant="tonal">Delete</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -36,7 +37,7 @@ type Props = {
   product: ProductDoc;
 }
 const props = defineProps<Props>();
-const emit = defineEmits(['clicked']);
+const emit = defineEmits(['clicked', 'deleted']);
 const product = props.product.data;
 //const ratingStr = ref(product.rating + "/5")
 //console.log(product);
@@ -44,5 +45,9 @@ const product = props.product.data;
 function showEdit(event) {
   console.log("showEdit - storeItem.vue");
   emit("clicked", props.product);
+}
+function emitDelete(event) {
+  console.log("deleted storeItem.vue");
+  emit("deleted", props.product)
 }
 </script>
