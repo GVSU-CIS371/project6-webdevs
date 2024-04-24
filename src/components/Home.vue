@@ -7,22 +7,31 @@
         cols="12"
         md="4"
       >
-        <StoreItem :product="product" class="fill-height"></StoreItem>
+        <StoreItem :product="product" class="fill-height" @clicked="onClickEdit"></StoreItem>
       </v-col>
     </v-row>
   </v-container>
-  <EditItem :product="testProduct"></EditItem>
+  <v-overlay v-model="showEdit">
+    <EditItem :product="editedProduct"></EditItem>
+  </v-overlay>
+  
 </template>
 
 <script lang="ts" setup>
   import { useProductStore } from '../stores/ProductStore';
-  //import { onMounted } from 'vue';
+  import { ref } from 'vue';
   import StoreItem from "./StoreItem.vue";
   import EditItem from "./EditItem.vue";
+  import { ProductDoc } from '../types/product';
   
   const productStore = useProductStore();
   productStore.init();
-  const testProduct = {
+  const showEdit = ref(false);
+  function onClickEdit(value: ProductDoc) {
+    editedProduct.value = value;
+    showEdit.value = true;
+  }
+  const editedProduct = ref({
     id: "0",
     data: {
       name: "Gamer's Delight Laptop",
@@ -36,7 +45,7 @@
         "https://m.media-amazon.com/images/I/31TcnQiBTpL._AC_UF894,1000_QL80_.jpg",
       category: "Electronics",
     },
-  }
+  });
     
   
   

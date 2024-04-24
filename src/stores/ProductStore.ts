@@ -42,7 +42,7 @@ export const useProductStore = defineStore("ProductStore", {
             category: prod.data.category
           },
           {merge: true}
-        );
+          );
         });
 
         await Promise.all(initPromises);

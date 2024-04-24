@@ -1,14 +1,16 @@
 <template>
-    <v-form @submit.prevent="handleSubmit">
-        <v-text-field label="Name" v-model="product.name" :rules="globalRules"></v-text-field>
-        <v-text-field label="Description" v-model="product.description" :rules="globalRules"></v-text-field>
-        <v-text-field label="Price" v-model="product.price" :rules="priceRules"></v-text-field>
-        <v-text-field label="Rating" v-model="product.rating" :rules="ratingRules"></v-text-field>
-        <v-text-field label="Stock" v-model="product.stock" :rules="stockRules"></v-text-field>
-        <v-text-field label="Image" v-model="product.image" :rules="globalRules"></v-text-field>
-        <v-text-field label="Category" v-model="product.category" :rules="globalRules"></v-text-field>
-        <v-btn class="mt-2" type="submit" block>Submit</v-btn>
-    </v-form>    
+    <v-container class="pa-5 ma-10 text-center">
+        <v-form @submit.prevent="handleSubmit">
+            <v-text-field label="Name" v-model="product.name" :rules="globalRules"></v-text-field>
+            <v-text-field label="Description" v-model="product.description" :rules="globalRules"></v-text-field>
+            <v-text-field label="Price" v-model="product.price" :rules="priceRules"></v-text-field>
+            <v-text-field label="Rating" v-model="product.rating" :rules="ratingRules"></v-text-field>
+            <v-text-field label="Stock" v-model="product.stock" :rules="stockRules"></v-text-field>
+            <v-text-field label="Image" v-model="product.image" :rules="globalRules"></v-text-field>
+            <v-text-field label="Category" v-model="product.category" :rules="globalRules"></v-text-field>
+            <v-btn class="mt-2" type="submit" block>Submit</v-btn>
+        </v-form>  
+    </v-container>  
 </template>  
   <script lang="ts" setup>
   //import { ref } from "vue";

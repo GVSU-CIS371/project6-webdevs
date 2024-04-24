@@ -22,6 +22,9 @@
       
       
     </template>
+    <v-card-actions>
+      <v-btn @click="showEdit">Edit</v-btn>
+    </v-card-actions>
   </v-card>
 </template>
 
@@ -36,5 +39,7 @@ const product = props.product.data;
 //const ratingStr = ref(product.rating + "/5")
 //console.log(product);
 
-
+function showEdit(event) {
+  this.$emit("clicked", product);
+}
 </script>
