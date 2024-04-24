@@ -4,6 +4,7 @@
     :title="product.name"
     :text="product.description"
     :prepend-avatar="product.image"
+    class="d-flex flex-column justify-space-between"
   >
     <template v-slot:subtitle >
       <span class="d-flex justify-space-between">
@@ -17,13 +18,12 @@
           readonly
         ></v-rating>
         <!-- <v-spacer/> -->
-        <span >${{ product.price.toFixed(2) }}</span>
+        <span >${{ Number(product.price).toFixed(2)}}</span>
       </span>
-      
-      
     </template>
+    
     <v-card-actions>
-      <v-btn @click.native="showEdit">Edit</v-btn>
+      <v-btn @click.native="showEdit" variant="tonal">Edit</v-btn>
     </v-card-actions>
   </v-card>
 </template>

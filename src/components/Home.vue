@@ -16,7 +16,7 @@
         min-width="800"
         title="Edit item"
       >
-      <EditItem :product="editedProduct"></EditItem>
+      <EditItem :product="editedProduct" @clicked="onClickSubmit"></EditItem>
       </v-card>
     
   </v-dialog>
@@ -49,9 +49,12 @@
     }
   });
   function onClickEdit(value: ProductDoc) {
-    console.log(value);
+    //console.log(value);
     editedProduct.value = value;
     showEdit.value = true;
+  }
+  function onClickSubmit() {
+    showEdit.value = false;
   }
     
   

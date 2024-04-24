@@ -36,20 +36,21 @@
   }
   const props = defineProps<Props>();
   const product = ref(props.product.data); 
-
+  const emit = defineEmits(['clicked']);
   const handleSubmit = async () => {
     const prodDoc = doc(db, "products", props.product.id);
-          await setDoc(prodDoc, {
-            name: product.value.name, 
-            description: product.value.description,
-            price: product.value.price,
-            rating: product.value.rating,
-            stock: product.value.stock,
-            image: product.value.image,
-            category: product.value.category
-          },
-          {merge: true}
-          );
+    await setDoc(prodDoc, {
+        name: product.value.name, 
+        description: product.value.description,
+        price: product.value.price,
+        rating: product.value.rating,
+        stock: product.value.stock,
+        image: product.value.image,
+        category: product.value.category
+    },
+    {merge: true}
+    );
+    emit("clicked");    //tell parent it was clicked to close dialogue 
   }
 
   //rules for form
