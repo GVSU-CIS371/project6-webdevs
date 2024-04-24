@@ -25,28 +25,28 @@ export const useProductStore = defineStore("ProductStore", {
   actions: {
     async init() {
       // Check if the Firestore database is already populated
-    const prodCollection: CollectionReference = collection(db, "products");
-    const firstDocSnapshot: DocumentSnapshot = await getDoc(doc(prodCollection, initProducts[0].id));
+      const prodCollection: CollectionReference = collection(db, "products");
+      const firstDocSnapshot: DocumentSnapshot = await getDoc(doc(prodCollection, initProducts[0].id));
 
-    // If the first document doesn't exist, populate the database
-    if (!firstDocSnapshot.exists()) {
-      const initPromises = initProducts.map(async (prod: any) => {     //initialize firebase
-        const prodDoc = doc(db, "products", prod.id);
-        await setDoc(prodDoc, {
-          name: prod.data.name, 
-          description: prod.data.description,
-          price: prod.data.price,
-          rating: prod.data.rating,
-          stock: prod.data.stock,
-          image: prod.data.image,
-          category: prod.data.category
-        },
-        {merge: true}
-      );
-      });
+      // If the first document doesn't exist, populate the database
+      if (!firstDocSnapshot.exists()) {
+        const initPromises = initProducts.map(async (prod: any) => {     //initialize firebase
+          const prodDoc = doc(db, "products", prod.id);
+          await setDoc(prodDoc, {
+            name: prod.data.name, 
+            description: prod.data.description,
+            price: prod.data.price,
+            rating: prod.data.rating,
+            stock: prod.data.stock,
+            image: prod.data.image,
+            category: prod.data.category
+          },
+          {merge: true}
+        );
+        });
 
-      await Promise.all(initPromises);
-    }
+        await Promise.all(initPromises);
+      }
 
       //populating pinia store from firebase
       const productCollection: CollectionReference = collection(db, "products");
