@@ -2,7 +2,7 @@
   <v-container>
     <v-row align="stretch">
       <v-col
-        v-for="(product, index) in productStore.products"
+        v-for="(product) in productStore.products"
         :key="product.id"
         cols="12"
         md="4"

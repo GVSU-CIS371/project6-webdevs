@@ -42,11 +42,11 @@ const product = props.product.data;
 //const ratingStr = ref(product.rating + "/5")
 //console.log(product);
 
-function showEdit(event) {
+function showEdit() {
   console.log("showEdit - storeItem.vue");
   emit("clicked", props.product);
 }
-function emitDelete(event) {
+function emitDelete() {
   console.log("deleted storeItem.vue");
   emit("deleted", props.product)
 }

@@ -17,17 +17,8 @@
   import { ProductDoc } from "../types/product";
   import { ref } from "vue";
   import {
-    DocumentReference,
-    CollectionReference,
     setDoc,
     doc,
-    collection,
-    addDoc,
-    QuerySnapshot,
-    QueryDocumentSnapshot,
-    DocumentSnapshot,
-    getDoc,
-    getDocs
   } from "firebase/firestore"
   import { db } from "../firebase.ts"
 

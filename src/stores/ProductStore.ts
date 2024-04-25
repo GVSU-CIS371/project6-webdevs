@@ -2,16 +2,12 @@ import { defineStore } from "pinia";
 import { ProductDoc, Product } from "../types/product";
 import { initProducts } from "../data-init";
 import {
-  DocumentReference,
   CollectionReference,
   setDoc,
   doc,
   collection,
-  addDoc,
   QuerySnapshot,
   QueryDocumentSnapshot,
-  DocumentSnapshot,
-  getDoc,
   getDocs
 } from "firebase/firestore"
 import { db } from "../firebase.ts"
