@@ -34,7 +34,7 @@
   import StoreItem from "./StoreItem.vue";
   import EditItem from "./EditItem.vue";
   import { ProductDoc } from '../types/product';
-  import {doc, collection, deleteDoc} from "firebase/firestore"
+  import {doc, deleteDoc} from "firebase/firestore"
   import {db, } from "../firebase"
   
   

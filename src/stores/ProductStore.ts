@@ -59,11 +59,14 @@ export const useProductStore = defineStore("ProductStore", {
         prodDocs.push({id: docId, data: productData});
       });
       this.products = prodDocs;
+      console.log("ProductStore initialized");
     },
-    filterByCategory(category: string) {
+    async filterByCategory(category: string) {
+      await this.init();
       this.products = this.products.filter((p: ProductDoc) => p.data.category === category);
     },
-    filterByRating(minRating: number) {
+    async filterByRating(minRating: number) {
+      await this.init();
       this.products = this.products.filter((p: ProductDoc) => p.data.rating > minRating);
     }
   }
