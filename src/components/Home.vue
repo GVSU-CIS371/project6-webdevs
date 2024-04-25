@@ -9,6 +9,11 @@
       >
         <StoreItem :product="product" class="fill-height" @clicked="onClickEdit" @deleted="onClickDelete"></StoreItem>
       </v-col>
+      
+      <v-col cols="12" md="4">
+        <v-btn block class="fill-height" variant="tonal" @click="onClickAdd">Add item...</v-btn>
+      </v-col>
+      
     </v-row>
   </v-container>
   <v-dialog v-model="showEdit" width="auto">
@@ -29,8 +34,9 @@
   import StoreItem from "./StoreItem.vue";
   import EditItem from "./EditItem.vue";
   import { ProductDoc } from '../types/product';
-  import {doc, deleteDoc} from "firebase/firestore"
-  import {db} from "../firebase"
+  import {doc, collection, deleteDoc} from "firebase/firestore"
+  import {db, } from "../firebase"
+  
   
   const productStore = useProductStore();
   productStore.init();
@@ -57,11 +63,29 @@
   }
   function onClickSubmit() {
     showEdit.value = false;
+    productStore.init();
   }
   async function onClickDelete(value: ProductDoc) {
     console.log("deleted: Home.vue");
     await deleteDoc(doc(db, "products", value.id));
     productStore.init();
+  }
+  async function onClickAdd() {
+    
+    const id = Math.floor(100000000 + Math.random() * 900000000).toString();
+    const newProduct = {
+      id: id,
+      data: {
+        name: "",
+        description: "",
+        price: 0,
+        rating: 0,
+        stock: 0,
+        image: "",
+        category: ""
+      }
+    }
+    onClickEdit(newProduct);
   }
     
   
